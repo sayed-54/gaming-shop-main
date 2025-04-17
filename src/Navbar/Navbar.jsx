@@ -18,16 +18,41 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [visible, setVisible] = useState(true);
   const [lastScroll, setLastScroll] = useState(0);
+
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [dropdownAgeOpen, setDropdownAgeOpen] = useState(false);
-  const menuRef = useRef(null);
 
+  const [mobileCategoryOpen, setMobileCategoryOpen] = useState(false);
+  const [mobileAgeOpen, setMobileAgeOpen] = useState(false);
+
+  const menuRef = useRef(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const cartItems = useSelector((state) => state.cart.items);
   const cartCount = cartItems?.length || 0;
   const admin = useSelector((state) => state.auth.admin);
+
+  let hoverTimeout1;
+  let hoverTimeout2;
+
+  const handleDropdownEnter = () => {
+    clearTimeout(hoverTimeout1);
+    setDropdownOpen(true);
+  };
+
+  const handleDropdownLeave = () => {
+    hoverTimeout1 = setTimeout(() => setDropdownOpen(false), 200);
+  };
+
+  const handleAgeEnter = () => {
+    clearTimeout(hoverTimeout2);
+    setDropdownAgeOpen(true);
+  };
+
+  const handleAgeLeave = () => {
+    hoverTimeout2 = setTimeout(() => setDropdownAgeOpen(false), 200);
+  };
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -75,11 +100,10 @@ export default function Navbar() {
 
         {/* Centered Desktop Dropdowns */}
         <div className="hidden md:flex justify-center gap-10 w-1/3 relative">
-          {/* Categories Dropdown */}
           <div
-            className="relative group"
-            onMouseEnter={() => setDropdownOpen(true)}
-            onMouseLeave={() => setDropdownOpen(false)}
+            className="relative"
+            onMouseEnter={handleDropdownEnter}
+            onMouseLeave={handleDropdownLeave}
           >
             <button className="flex items-center gap-2 font-semibold text-[#0e2c6c]">
               Categories <span className="text-gray-400">▼</span>
@@ -95,11 +119,10 @@ export default function Navbar() {
             )}
           </div>
 
-          {/* Shop by Age Dropdown */}
           <div
-            className="relative group"
-            onMouseEnter={() => setDropdownAgeOpen(true)}
-            onMouseLeave={() => setDropdownAgeOpen(false)}
+            className="relative"
+            onMouseEnter={handleAgeEnter}
+            onMouseLeave={handleAgeLeave}
           >
             <button className="flex items-center gap-2 font-semibold text-[#0e2c6c]">
               Shop by Age <span className="text-gray-400">▼</span>
@@ -118,9 +141,7 @@ export default function Navbar() {
         <div className="w-1/3 hidden md:flex items-center justify-end gap-6">
           <div className="flex items-center gap-3">
             <IoCall size={24} color="#0e2c6c" />
-            <h2 className="text-lg text-[#0e2c6c] font-semibold">
-              +201002726498
-            </h2>
+            <h2 className="text-lg text-[#0e2c6c] font-semibold">+201002726498</h2>
           </div>
           <div className="flex items-center gap-4">
             {admin ? (
@@ -177,55 +198,47 @@ export default function Navbar() {
           <FaTimes />
         </button>
 
-        <ul
-          className="flex flex-col gap-6 mt-8 text-[#0e2c6c] font-semibold text-lg"
-          onMouseLeave={() => {
-            setDropdownOpen(false);
-            setDropdownAgeOpen(false);
-          }}
-        >
+        <ul className="flex flex-col gap-6 mt-8 text-[#0e2c6c] font-semibold text-lg">
           <li>
             <Link to="/" className="flex items-center gap-3">
               <GiCardboardBox size={20} />
               Home
             </Link>
           </li>
-          <li className="relative flex items-center gap-3 cursor-pointer"
-              onMouseEnter={() => setDropdownOpen(true)}
-              onMouseLeave={() => setDropdownOpen(false)}
-          >
+
+          <li onClick={() => setMobileCategoryOpen(!mobileCategoryOpen)} className="cursor-pointer flex items-center gap-3">
             <MdCategory size={20} />
-            Categories <span className="text-gray-400">{">"}</span>
-            {dropdownOpen && (
-              <ul className="absolute left-0 z-10 top-full bg-white shadow-lg rounded-lg mt-2 p-2 w-48">
-                <li><Link to="/wheels" className="block p-2 hover:bg-gray-100">Active wheels</Link></li>
-                <li><Link to="/smart" className="block p-2 hover:bg-gray-100">Smart play</Link></li>
-                <li><Link to="/boys" className="block p-2 hover:bg-gray-100">For boys</Link></li>
-                <li><Link to="/girls" className="block p-2 hover:bg-gray-100">For Girls</Link></li>
-                <li><Link to="/mix" className="block p-2 hover:bg-gray-100">Mix</Link></li>
-              </ul>
-            )}
+            Categories <span className="text-gray-400">{mobileCategoryOpen ? "▼" : ">"}</span>
           </li>
+          {mobileCategoryOpen && (
+            <ul className="ml-6 bg-white shadow-md rounded-md mt-2 p-2 text-[#0e2c6c]">
+              <li><Link to="/wheels" className="block p-2 hover:bg-gray-100">Active wheels</Link></li>
+              <li><Link to="/smart" className="block p-2 hover:bg-gray-100">Smart play</Link></li>
+              <li><Link to="/boys" className="block p-2 hover:bg-gray-100">For boys</Link></li>
+              <li><Link to="/girls" className="block p-2 hover:bg-gray-100">For girls</Link></li>
+              <li><Link to="/mix" className="block p-2 hover:bg-gray-100">Mix</Link></li>
+            </ul>
+          )}
+
           <li>
             <Link to="/products" className="flex items-center gap-3">
               <BsBoxSeam size={20} />
               All Products
             </Link>
           </li>
-          <li className="relative flex items-center gap-3 cursor-pointer"
-              onMouseEnter={() => setDropdownAgeOpen(true)}
-              onMouseLeave={() => setDropdownAgeOpen(false)}
-          >
+
+          <li onClick={() => setMobileAgeOpen(!mobileAgeOpen)} className="cursor-pointer flex items-center gap-3">
             <MdCategory size={20} />
-            Shop by Age <span className="text-gray-400">{">"}</span>
-            {dropdownAgeOpen && (
-              <ul className="absolute left-0 top-full bg-white shadow-lg rounded-lg mt-2 p-2 w-48">
-                <li><Link to="/age/0-1" className="block p-2 hover:bg-gray-100">0-1 Years</Link></li>
-                <li><Link to="/age/1-3" className="block p-2 hover:bg-gray-100">1-3 Years</Link></li>
-                <li><Link to="/age/+3" className="block p-2 hover:bg-gray-100">+3 Years</Link></li>
-              </ul>
-            )}
+            Shop by Age <span className="text-gray-400">{mobileAgeOpen ? "▼" : ">"}</span>
           </li>
+          {mobileAgeOpen && (
+            <ul className="ml-6 bg-white shadow-md rounded-md mt-2 p-2 text-[#0e2c6c]">
+              <li><Link to="/age/0-1" className="block p-2 hover:bg-gray-100">0-1 Years</Link></li>
+              <li><Link to="/age/1-3" className="block p-2 hover:bg-gray-100">1-3 Years</Link></li>
+              <li><Link to="/age/+3" className="block p-2 hover:bg-gray-100">+3 Years</Link></li>
+            </ul>
+          )}
+
           <li>
             <Link to="/contact" className="flex items-center gap-3">
               <IoCall size={20} />
