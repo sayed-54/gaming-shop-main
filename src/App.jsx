@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { logout } from "./rtk/slices/authSlice";
 import "./App.css";
 import Footer from "./Footer/Footer";
-import Header from "./head/header";
+import Header from "./head/Header";
 import Info from "./info/Info";
 import Navbar from "./Navbar/Navbar";
 import OurProducts from "./our-products/ourProducts";
