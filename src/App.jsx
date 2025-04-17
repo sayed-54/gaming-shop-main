@@ -21,7 +21,7 @@ import AdminDashboard from "./adminDashboard/AdminDashboard";
 import ProductForm from "./adminDashboard/ProductForm";
 import Contact from "./contact/Contact";
 import AgeProducts from "./ageProduct/AgeProducts";
-import BundlesOffer from "./bundles-offer/BundlesOffer";
+// import BundlesOffer from "./bundles-offer/BundlesOffer";
 import HomeProducts from "./Home-products/HomeProducts";
 import Wheels from "./wheels/ActiveWheels";
 import MovingText from "./moving-banner/MovingText";
@@ -57,7 +57,7 @@ function App() {
               <MovingText />
               <OurProducts age={age} setAge={setAge} />
               <MovingImage />
-              <BundlesOffer />
+              {/* <BundlesOffer /> */}
               <HomeProducts />
               <Info />
               <Footer />
@@ -73,7 +73,7 @@ function App() {
         <Route path="/boys" element={<BoysToys />} />
         <Route path="/girls" element={<GirlsToys />} />
         <Route path="/mix" element={<Mix />} />
-        <Route path="/bundles" element={<BundlesOffer />} />
+        {/* <Route path="/bundles" element={<BundlesOffer />} /> */}
         <Route path="/wheels" element={<Wheels />} />
         <Route path="/smart" element={<Smart />} />
         <Route path="/age/:age" element={<AgeProducts />} />
