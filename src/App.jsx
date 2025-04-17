@@ -6,7 +6,7 @@ import Footer from "./Footer/Footer";
 import Header from "./head/Header";
 import Info from "./info/Info";
 import Navbar from "./Navbar/Navbar";
-import OurProducts from "./our-products/ourProducts";
+import OurProducts from "./our-products/OurProducts";
 import Login from "./Login/Login";
 import AllProducts from "./all-products/AllProducts";
 import Filter from "./filter/Filter";
