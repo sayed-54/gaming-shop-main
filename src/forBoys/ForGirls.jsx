@@ -66,7 +66,7 @@ export default function GirlsToys() {
   return (
     <div className="p-6 lg:mt-[250px] mt-[150px]">
       <h2 className="text-3xl font-bold text-pink-700 mb-4 text-center">
-        🎀 Girls' Toys
+        🎀 Girls&apos; Toys
       </h2>
 
       {/* Error Handling */}

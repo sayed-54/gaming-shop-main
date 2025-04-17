@@ -4,6 +4,7 @@ import { fetchProducts } from "../rtk/slices/productsSlice";
 import { addToCart } from "../rtk/slices/cartSlice";
 import { Link } from "react-router-dom";
 
+// eslint-disable-next-line react/prop-types
 export default function Filter({ age }) {
   const dispatch = useDispatch();
   const { products, status } = useSelector((state) => state.products);

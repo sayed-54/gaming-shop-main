@@ -4,12 +4,14 @@ import { fetchProducts } from "../rtk/slices/productsSlice";
 import { addToCart } from "../rtk/slices/cartSlice";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+// eslint-disable-next-line no-unused-vars
 import { FaShoppingCart, FaEye, FaRegHeart } from "react-icons/fa";
 
 export default function BundlesOffer() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const products = useSelector((state) => state.products.products);
+  // eslint-disable-next-line no-unused-vars
   const [hoveredProduct, setHoveredProduct] = useState(null);
   const [visibleCount, setVisibleCount] = useState(4);
 

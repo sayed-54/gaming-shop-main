@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import { useState, useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -184,7 +185,7 @@ export default function AdminDashboard() {
         >
           <option value="">Select Gender</option>
           <option value="boys">Boys</option>
-          <option value="girls">Girls</option>
+          <option value="girl">Girls</option>
         </select>
         <button
           type="submit"
